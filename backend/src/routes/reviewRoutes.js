@@ -7,7 +7,14 @@ router.get('/vih', (req, res) => {
 });//new route
 
 
-router.post('/', submitReview);
-router.get('/', getReviews);
+const { protect, optionalProtect } = require('../middleware/authMiddleware');
+
+router.get('/vih', (req, res) => {
+  res.send('Review API is running');
+});//new route
+
+
+router.post('/', optionalProtect, submitReview);
+router.get('/', optionalProtect, getReviews);
 
 module.exports = router;

@@ -11,8 +11,13 @@ exports.submitReview = async (req, res, next) => {
       return res.status(500).json({ error: 'Review could not be generated.' });
     }
 
-    
-    const savedReview = await Review.create({ code, reviewResult: reviewText });
+    // Save review with user ID if authenticated
+    const reviewData = { code, reviewResult: reviewText };
+    if (req.user) {
+      reviewData.user = req.user.id;
+    }
+
+    const savedReview = await Review.create(reviewData);
     res.status(201).json({
       id: savedReview._id,
       original: savedReview.code,
@@ -28,7 +33,13 @@ exports.submitReview = async (req, res, next) => {
 
 exports.getReviews = async (req, res, next) => {
   try {
-    const reviews = await Review.find().sort({ createdAt: -1 });
+    // If user is authenticated, get their reviews. Else return empty or public?
+    // For this app, let's say history is only for logged in users.
+    if (!req.user) {
+      return res.json([]); 
+    }
+
+    const reviews = await Review.find({ user: req.user.id }).sort({ createdAt: -1 });
     res.json(reviews);
   } catch (err) {
     // next(err);

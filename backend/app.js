@@ -15,9 +15,14 @@ app.get('/', (req, res) => {
   res.send('API is running');
 }); //new route
 
+
+
+app.use('/api/auth', require('./src/routes/authRoutes'));
 app.use('/api/reviews', reviewRoutes);
 
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server running on port ${PORT}`);
+});
