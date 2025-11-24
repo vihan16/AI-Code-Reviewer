@@ -110,8 +110,8 @@ function Dashboard() {
       {/* Sidebar */}
       <aside className="w-80 bg-[#161b22] border-r border-gray-800 flex flex-col shadow-2xl z-20">
         {/* Header */}
-        <div className="p-5 border-b border-gray-800 bg-[#161b22]">
-          <div className="flex justify-between items-center mb-4">
+        <div className="p-3 border-b border-gray-800 bg-[#161b22]">
+          <div className="flex justify-between items-center">
             <div>
               <h1 className="text-xl font-bold text-white flex items-center gap-2 tracking-tight">
                 <div className="p-1.5 bg-blue-600 rounded-lg">
@@ -122,7 +122,7 @@ function Dashboard() {
                 CodeReviewer
               </h1>
             </div>
-            <button
+            {/* <button
               className="p-2 rounded-lg hover:bg-gray-800 text-gray-400 hover:text-white transition-all duration-200"
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
               aria-label="Toggle theme"
@@ -137,51 +137,17 @@ function Dashboard() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
                 </svg>
               )}
-            </button>
+            </button> */}
           </div>
 
-          {/* User Profile / Login */}
-          {user ? (
-            <div className="flex items-center justify-between bg-[#0d1117] p-3 rounded-lg border border-gray-800">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-xs font-bold">
-                  {user.username.charAt(0).toUpperCase()}
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-xs font-medium text-gray-200">{user.username}</span>
-                  <span className="text-[10px] text-gray-500">Free Plan</span>
-                </div>
-              </div>
-              <button
-                onClick={logout}
-                className="text-xs text-gray-500 hover:text-red-400 transition-colors"
-              >
-                Logout
-              </button>
-            </div>
-          ) : (
-            <div className="flex gap-2">
-              <button
-                onClick={() => navigate('/login')}
-                className="flex-1 py-2 bg-[#0d1117] hover:bg-gray-800 border border-gray-700 rounded-lg text-xs font-medium text-gray-300 transition-all"
-              >
-                Login
-              </button>
-              <button
-                onClick={() => navigate('/signup')}
-                className="flex-1 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg text-xs font-medium text-white transition-all"
-              >
-                Sign Up
-              </button>
-            </div>
-          )}
+
         </div>
 
         {/* New Review Button */}
-        <div className="p-4 border-b border-gray-800 bg-[#161b22]">
+        <div className="p-3 border-b border-gray-800 bg-[#161b22]">
           <button
             onClick={handleNewReview}
-            className="w-full py-2.5 px-4 bg-blue-500 hover:bg-blue-400 text-black rounded-lg text-sm font-medium shadow-lg shadow-blue-900/20 transition-all flex items-center justify-center gap-2 group"
+            className="w-full py-2 px-3 bg-blue-500 hover:bg-blue-400 text-black rounded-lg text-sm font-medium shadow-lg shadow-blue-900/20 transition-all flex items-center justify-center gap-2 group"
           >
             <svg className="w-4 h-4 transition-transform group-hover:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -198,6 +164,44 @@ function Dashboard() {
             selectedReviewId={selectedReview?.id || selectedReview?._id}
           />
         </div>
+
+        {/* User Profile / Login */}
+        {user ? (
+          <div className="flex items-center m-2 mx-4 justify-between bg-[#0d1117] p-2 rounded-lg border border-gray-800">
+            <div className="flex items-center gap-2">
+              <div className="w-6 h-6 rounded-full bg-blue-600 flex items-center justify-center text-xs font-bold">
+                {user.username.charAt(0).toUpperCase()}
+              </div>
+              <div className="flex flex-col">
+                <span className="text-xs font-medium text-gray-200">{user.username}</span>
+                <span className="text-[10px] text-gray-500">Free Plan</span>
+              </div>
+            </div>
+            <button
+              onClick={logout}
+              className="text-xs text-gray-500 hover:text-red-400 transition-colors"
+            >
+              Logout
+            </button>
+          </div>
+        ) : (
+          <div className="flex gap-2 m-2 mx-4">
+            <button
+              onClick={() => navigate('/login')}
+              className="flex-1 py-2 bg-[#0d1117] hover:bg-gray-800 border border-gray-700 rounded-lg text-xs font-medium text-gray-300 transition-all"
+            >
+              Login
+            </button>
+            <button
+              onClick={() => navigate('/signup')}
+              className="flex-1 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg text-xs font-medium text-white transition-all"
+            >
+              Sign Up
+            </button>
+          </div>
+        )}
+
+
       </aside>
 
       {/* Main content */}
